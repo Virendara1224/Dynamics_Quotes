@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <title>Dynamic Quotes</title>
+    <style>
+        body {
+          font-family: "Sofia", sans-serif;
+        }
+        </style>
+</head>
+<body>
+    <!-- <div class="container">
+        <img src="download.png" alt="img">
+    </div> -->
+    <div class="information">
+
+        <div id="quotes"></div>
+        <div class="author" id="author"></div>
+    </div>  
+    <button class="btn" id="newQ">New Quotes</button>
+    <script>
+        const qoutes=document.getElementById("quotes");
+        const author=document.getElementById("author");
+        const newQ=document.getElementById("newQ");
+        let  realData;
+        // let l=10;
+        const getNewQuote=()=>{
+            let num= Math.floor((Math.random())*30);
+            qoutes.innerText = `${realData.quotes[num].quote}`;
+            var aut = `${realData.quotes[num].author}`;
+            // aut-="type.fit";
+            author.innerText =(aut);
+        }
+        const getQuotes = async ()=>{
+            const api= "https://dummyjson.com/quotes"
+            try {
+                let data = await fetch(api);
+                realData = await data.json();
+                // console.log(realData);
+                //  l=realData.quotes[5].id;
+                getNewQuote();
+                //  console.log(l);
+                // console.log(realData.quotes[0].author);
+            } catch (error) {                
+            }
+        };
+        getQuotes();
+        newQ.addEventListener('click', getQuotes);
+    </script>
+</body>
+</html>
